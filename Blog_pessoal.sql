@@ -1,3 +1,7 @@
+CREATE DATABASE de_blog;
+
+USE de_blog;
+
 CREATE TABLE `postagens` (
 	`id` bigint NOT NULL AUTO_INCREMENT,
 	`titulo` varchar(255) NOT NULL,
@@ -8,11 +12,15 @@ CREATE TABLE `postagens` (
 	PRIMARY KEY (`id`)
 );
 
+USE de_blog;
+
 CREATE TABLE `temas` (
 	`id` bigint NOT NULL AUTO_INCREMENT,
 	`descricao` varchar(255) NOT NULL,
 	PRIMARY KEY (`id`)
 );
+
+USE de_blog;
 
 CREATE TABLE `usuarios` (
 	`id` bigint NOT NULL AUTO_INCREMENT,
