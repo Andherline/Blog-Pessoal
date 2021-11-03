@@ -36,7 +36,7 @@ public class PostagemController {
 	- Criação de uma varíavel de caminho : "/[variavel]"
 	- @PathVariable: pega do caminho e retorna para o atributo id do tipo long
 	- Método que retorna um elemento da "tabela" através da passagem da chave primaria(id)
-	  pelo caminho passado no enderenço.
+	  pelo caminho passado no endereço.
 	 *  
 	 */
 	@GetMapping("/{id}")
@@ -66,7 +66,7 @@ public class PostagemController {
 	@PostMapping
 	public ResponseEntity<Postagem> postPostagem(@RequestBody Postagem postagem)
 	{
-		//status(HttpStatus.CREATED): retorno 201 para confirma a criação criação
+		//status(HttpStatus.CREATED): retorno 201 para confirmar a criação 
 		//body(postagemRepository.save(postagem));
 		return ResponseEntity.status(HttpStatus.CREATED)
 				.body(postagemRepository.save(postagem));
@@ -82,8 +82,12 @@ public class PostagemController {
 	public ResponseEntity<Postagem> putPostagem(@RequestBody Postagem postagem)
 	{
 		//status(HttpStatus.OK): 
-		return ResponseEntity.status(HttpStatus.OK)
-				.body(postagemRepository.save(postagem));
+		return postagemRepository.findById(postagem.getId())
+				.map(reposta -> {
+					Postagem atualizarPostagem = postagemRepository.save(postagem);
+					return ResponseEntity.ok().body(atualizarPostagem);
+				})
+				.orElse(ResponseEntity.notFound().build());
 	}
 	
 	/*
@@ -93,8 +97,14 @@ public class PostagemController {
 	 * 
 	 */
 	@DeleteMapping("/{id}")
-	public void deletePostagem(@PathVariable long id)
+	public ResponseEntity<?> deletePostagem(@PathVariable long id)
 	{
-		postagemRepository.deleteById(id);
+		return postagemRepository.findById(id).
+				map(reposta -> {
+					postagemRepository.deleteById(id);
+					return ResponseEntity.ok().build();
+				})
+				.orElse(ResponseEntity.notFound().build());
+
 	}
 }
