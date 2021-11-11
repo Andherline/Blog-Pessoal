@@ -33,7 +33,7 @@ public class UsuarioController {
 	private UsuarioRepository usuarioRepository;
 	
 	//mostra todo os usuários cadastrado
-	@GetMapping("/mostrar")
+	@GetMapping("/all")
 	public ResponseEntity<List<Usuario>> getAll()
 	{
 		return ResponseEntity.ok(usuarioRepository.findAll());
