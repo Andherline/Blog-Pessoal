@@ -33,6 +33,13 @@ public class UsuarioService {
 
 		if (usuarioRepository.findById(usuario.getId()).isPresent()) {
 			
+			Optional<Usuario> buscaUsuario = usuarioRepository.findByUsuario(usuario.getUsuario());
+
+			if (buscaUsuario.isPresent()) {				
+				if (buscaUsuario.get().getId() != usuario.getId())
+					return Optional.empty();
+			}
+			
 			usuario.setSenha(criptografarSenha(usuario.getSenha()));
 
 			return Optional.of(usuarioRepository.save(usuario));
@@ -77,12 +84,12 @@ public class UsuarioService {
 		return encoder.matches(senhaDigitada, senhaBanco);
 
 	}
-	//verificar retorno da chave.
-	private String gerarBasicToken(String usuario, String senha) {
 
-		String tokenBase = usuario + ":" + senha;
+	private String gerarBasicToken(String email, String password) {
+		
+		String tokenBase = email + ":" + password;
 		byte[] tokenBase64 = Base64.encodeBase64(tokenBase.getBytes(Charset.forName("US-ASCII")));
-		return "Basic "+new String(tokenBase64);
+		return "Basic " + new String(tokenBase64);
 
 	}
 

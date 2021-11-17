@@ -49,11 +49,10 @@ public class UsuarioController {
 	
 	//desafio: não permitir a existência de dois usuarios iguais
 	@PutMapping("/atualizar")
-	public ResponseEntity<Usuario> puttUsuario(@Valid @RequestBody Usuario usuario)
-	{
+	public ResponseEntity<Usuario> putUsuario(@Valid @RequestBody Usuario usuario){		
 		return usuarioService.atualizarUsuario(usuario)
-				             .map(resposta -> ResponseEntity.status(HttpStatus.OK).body(resposta))
-				             .orElse(ResponseEntity.status(HttpStatus.BAD_REQUEST).build());
+			.map(resposta -> ResponseEntity.status(HttpStatus.OK).body(resposta))
+			.orElse(ResponseEntity.status(HttpStatus.BAD_REQUEST).build());
 	}
 	
 	//logar necessitar mandar dados
