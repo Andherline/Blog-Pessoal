@@ -77,12 +77,12 @@ public class UsuarioService {
 		return encoder.matches(senhaDigitada, senhaBanco);
 
 	}
-
+	//verificar retorno da chave.
 	private String gerarBasicToken(String usuario, String senha) {
 
 		String tokenBase = usuario + ":" + senha;
 		byte[] tokenBase64 = Base64.encodeBase64(tokenBase.getBytes(Charset.forName("US-ASCII")));
-		return "Basic " + new String(tokenBase64);
+		return "Basic "+new String(tokenBase64);
 
 	}
 
