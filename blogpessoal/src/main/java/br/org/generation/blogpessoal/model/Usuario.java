@@ -11,9 +11,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import io.swagger.annotations.ApiModelProperty;
 
 @Entity
 @Table(name = "tb_usuarios")
@@ -26,9 +29,11 @@ public class Usuario {
 	@NotBlank(message = "Nome não poder ser nulo")
 	private String nome;
 	
-	@NotBlank(message = "O usario não poder ser nulo")
-	@Email(message = "Não é um email válido")
+	@ApiModelProperty(example = "email@email.com.br")
+	@NotNull(message = "O atributo Usuário é Obrigatório!")
+	@Email(message = "O atributo Usuário deve ser um email válido!")
 	private String usuario;
+
 	
 	@NotBlank(message = "Nome não poder ser nulo")
 	@Size(min = 8, message = "A senha conter pelos 8 caracteres")
