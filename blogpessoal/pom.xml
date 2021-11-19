@@ -53,6 +53,11 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		<!-- Dependências do PostgreSQL apra o Deploy no Heroku -->
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+		</dependency>
 		<!-- Dependências do Banco de dados H@ -->
 		<dependency>
 			<groupId>com.h2database</groupId>
